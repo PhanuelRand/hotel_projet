@@ -1,0 +1,37 @@
+<%= form_for(@chambre) do |f| %>
+  <% if @chambre.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@chambre.errors.count, "error") %> prohibited this chambre from being saved:</h2>
+
+      <ul>
+      <% @chambre.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :type_chambre %><br />
+    <%= f.text_field :type_chambre, class: "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :vue %><br />
+    <%= f.text_field :vue, class: "form-control" %>
+  </div>
+   <div class="field">
+    <%= f.label :image %><br />
+    <%= f.text_field :image, class: "form-control" %>
+  </div>
+   <div class="field">
+    <%= f.label :price %><br />
+    <%= f.text_field :price, class: "form-control" %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Log in", class: "btn btn-primary" %>
+  </div>
+<% end %>

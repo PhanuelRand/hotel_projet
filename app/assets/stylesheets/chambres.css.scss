@@ -1,0 +1,65 @@
+// Place all the styles related to the Chambres controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+/*Index / Home*/
+.chambre_container{
+    border: 1px solid rgba(153, 153, 153, 0.336);
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.3);
+}
+
+.chambre_img{
+    width: 100%;
+}
+
+.nom_chambre{
+    font-size: 20px;
+    color: #444;
+    font-weight: 500;
+}
+
+
+.type_chambre{
+    font-size: 17px;
+    color: #138496;
+    font-weight: 600;
+}
+
+.vue_chambre{
+    font-size: 17px;
+    color: #218838;
+    font-weight: bold;
+}
+
+.price_chambre{
+    color: #0e6d22;
+}
+
+/* Details */
+.chambre_img_details {
+    width: 100%;
+}
+
+.nom_details_chambre{
+    font-size: 30px;
+    color: #444;
+    font-weight: 600;
+}
+
+.type_details_chambre{
+    font-size: 18px;
+    color: #138496;
+    font-weight: 600;
+}
+
+.vue_details_chambre{
+    font-size: 18px;
+    color: #138496;
+    font-weight: 600;
+}
+
+.nom_details_chambre_titre{
+    font-size: 20px;
+}

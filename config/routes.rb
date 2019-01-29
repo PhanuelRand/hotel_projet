@@ -1,4 +1,23 @@
-HotelProjet::Application.routes.draw do
+HotelProjet::Application.routes.draw do\
+  root to: 'chambres#index'
+
+  match '/home',  to: 'chambres#index'
+
+  devise_for :admins
+
+  devise_for :users
+
+  resources :chambres
+  resources :users, only: [:show]
+
+  match '/profile',  to: 'users/:id'
+  #match 'users/:id' => 'users#show', via: :get
+
+  devise_for :users, path: 'auth', path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'cmon_let_me_in' }
+  devise_for :admins, path: 'auth', path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'cmon_let_me_in' }
+
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -7,7 +26,7 @@ HotelProjet::Application.routes.draw do
   # Keep in mind you can assign values other than :controller and :action
 
   # Sample of named route:
-  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
+  #match '/profile/:id' => 'users#show', :as => :profile
   # This route can be invoked with purchase_url(:id => product.id)
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):

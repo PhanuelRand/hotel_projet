@@ -9,7 +9,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg bg-dark">
+  <nav class="navbar navbar-expand-lg">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -21,7 +21,6 @@
             <a class="nav-link white" href="/home">Acceuil</a>
           </li>
           <li class="nav-item">
-            <%# <a class="nav-link white" href="">Profil</a> %>
             <%= link_to "Profil", current_user, class: "nav-link white" %>
           </li>
           <li class="nav-item">
@@ -29,13 +28,13 @@
           </li>
         <% else %>
           <li class="nav-item active">
-            <a class="nav-link white" href="/home">Home</a>
+            <a class="nav-link white" href="/home">Acceuil</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link white" href='/users/sign_up'>Register</a>
+            <a class="nav-link white" href='/users/sign_up'>S'inscrire</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link white" href='/users/sign_in'>Login</a>
+            <a class="nav-link white" href='/users/sign_in'>Se connecter</a>
           </li>
         <% end %>         
       </ul>
@@ -43,16 +42,18 @@
   </nav>
 
 
-<div class="container">
-  <% if notice %>
+<div class="container-fluid" style="padding: 0px !important;">
+  <%= yield %>
+
+  <!-- 
+    <% if notice %>
     <p class="alert alert-success"><%= notice %></p>
   <% end %>
   <% if alert %>
     <p class="alert alert-danger"><%= alert %></p>
   <% end %>
-  <%= yield %>
-
-  <!--data-toggle="modal" data-target="#login_modal" <div class="modal fade" id="login_modal" tabindex="-1" role="dialog" aria-labelledby="login_modalLabel" aria-hidden="true">
+  
+  data-toggle="modal" data-target="#login_modal" <div class="modal fade" id="login_modal" tabindex="-1" role="dialog" aria-labelledby="login_modalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -77,6 +78,14 @@
       </div>
     </div>
   </div> -->
+
+<script>
+  $( "#nb_chambre" ).change(function () {
+      $( "#nb_chambre option:selected" ).each(function() {
+        console.log(this.value);
+      });
+  })   
+</script>
 
 </div>
 

@@ -1,0 +1,43 @@
+<h1>Listing reservations</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Chambre</th>
+    <th>User name</th>
+    <th>User email</th>
+    <th>User age</th>
+    <th>Type de chambre</th>
+    <th>Type de vue</th>
+    <th>Date arrive</th>
+    <th>Date depart</th>
+    <th>Demande particuliere</th>
+    <th>Price</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @reservations.each do |reservation| %>
+  <tr>
+    <td><%= reservation.user %></td>
+    <td><%= reservation.chambre %></td>
+    <td><%= reservation.user_name %></td>
+    <td><%= reservation.user_email %></td>
+    <td><%= reservation.user_age %></td>
+    <td><%= reservation.type_de_chambre %></td>
+    <td><%= reservation.type_de_vue %></td>
+    <td><%= reservation.date_arrive %></td>
+    <td><%= reservation.date_depart %></td>
+    <td><%= reservation.demande_particuliere %></td>
+    <td><%= reservation.price %></td>
+    <td><%= link_to 'Show', reservation %></td>
+    <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>
+    <td><%= link_to 'Destroy', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Reservation', new_reservation_path %>

@@ -1,37 +1,55 @@
+=render 'static_pages/header'
+%br
+%br
+%div.container#lists_chambres
+    %h1.titre Choisissez parmi nos luxueuses chambres
+    %h5.sous_titre Reserver n'a jamais ete aussi facile
+    %hr
+    -if signed_in?
+        -if current_user.admin?
+            %p=link_to 'Nouvelle chambre', new_chambre_path, {:class => "btn btn-primary white"}
+            %hr
 
+    %div.row
+        %div.col-12
+            %li.filter#jungle Jungle
+            %li.filter#ocean Ocean
+            %hr
+            %li.filter#all Tout
+            %li.filter#simple Simple
+            %li.filter#double Double
+            %li.filter Executive
+            %li.filter Suite presidentielle
+            %hr
+        - @chambres.each do |chambre|
+            -# -if chambre.type_chambre == "Simple"
+            %div.col-lg-4.col-12#chambre_type
+                %div.chambre_container 
+                    =image_tag("#{chambre.image}", class: "chambre_img")
+                    %span.nom_chambre=chambre.name
+                    %br
+                    %span.type_chambre_titre Type du chambre: 
+                    %span.type_chambre=chambre.type_chambre
+                    %br
+                    %span.vue_chambre_titre Vue de la chambre: 
+                    %span.vue_chambre=chambre.vue
+                    %br
+                    %span.price_chambre A partir de 
+                    %span.price_chambre #{chambre.price} $
+                    %br
+                    %br
+                    %div.row
+                        %div.col-lg-12.col-12 
+                            %span=link_to 'Details', chambre, :class => "btn btn-primary white" 
+                            -if signed_in?
+                                -if current_user.admin == false 
+                                    %span=link_to 'Reserver', chambre, :class => "btn btn-info white"
 
-%h1 Choisissez parmi nos luxueuses chambres
-%h5 Reserver n'a jamais ete aussi facile
--if signed_in?
-    -if current_user.admin?
-        %p=link_to 'New Chambre', new_chambre_path, {:class => "btn btn-primary white"}
-
-%div.row
-    - @chambres.each do |chambre|
-        %div.col-lg-4.col-12
-            %div.chambre_container 
-                =image_tag("#{chambre.image}", class: "chambre_img")
-                %span.nom_chambre=chambre.name
-                %br
-                %span.type_chambre_titre Type du chambre: 
-                %span.type_chambre=chambre.type_chambre
-                %br
-                %span.vue_chambre_titre Vue de la chambre: 
-                %span.vue_chambre=chambre.vue
-                %br
-                %span.price_chambre A partir de 
-                %span.price_chambre #{chambre.price} $
-                %br
-                %br
-                -# %span=chambre.prix, class: "vue_chambre"
-                %p=link_to 'Details', chambre, :class => "btn btn-info white" 
-                -if signed_in?
-                    -if current_user.admin?
-                        %div.row
-                            %div.col-lg-6.col-12 
-                                %p=link_to 'Modifier', edit_chambre_path(chambre), :class => "btn btn-success white"
-                            %div.col-lg-6.col-12 
-                                %p=link_to 'Supprimer', chambre, :method => :delete, :data => {:confirm => "Voulez vous vraiment supprimer cette chambre?" }, :class => "btn btn-danger white"
                     
-            
+                    -if signed_in?
+                        -if current_user.admin?
+                            %div.row
+                                %div.col-lg-6.col-12 
+                                    %p=link_to 'Modifier', edit_chambre_path(chambre), :class => "btn btn-success white"
+                                    %p=link_to 'Supprimer', chambre, :method => :delete, :data => {:confirm => "Voulez vous vraiment supprimer cette chambre?" }, :class => "btn btn-danger white"
 

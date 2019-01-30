@@ -1,4 +1,9 @@
-%br
-%div.row
-  %div.col-12
-    %p.nom_details_chambre=@user.email
+%div.container
+  %br
+  %div.row
+    %div.col-12
+      %h2.titre_profil Bonjour, #{@user.email}
+      %hr
+      %h3 Voici vos reservations
+      %hr
+      =render 'reservations/index'

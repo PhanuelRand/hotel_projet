@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user: 
+  chambre: 
+  user_name: MyString
+  user_email: MyString
+  user_age: 1
+  type_de_chambre: MyString
+  type_de_vue: MyString
+  date_arrive: 2019-01-30 14:30:28
+  date_depart: 2019-01-30 14:30:28
+  demande_particuliere: MyText
+  price: 9.99
+
+two:
+  user: 
+  chambre: 
+  user_name: MyString
+  user_email: MyString
+  user_age: 1
+  type_de_chambre: MyString
+  type_de_vue: MyString
+  date_arrive: 2019-01-30 14:30:28
+  date_depart: 2019-01-30 14:30:28
+  demande_particuliere: MyText
+  price: 9.99

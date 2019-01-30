@@ -1,0 +1,60 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @reservation.user %>
+</p>
+
+<p>
+  <b>Chambre:</b>
+  <%= @reservation.chambre %>
+</p>
+
+<p>
+  <b>User name:</b>
+  <%= @reservation.user_name %>
+</p>
+
+<p>
+  <b>User email:</b>
+  <%= @reservation.user_email %>
+</p>
+
+<p>
+  <b>User age:</b>
+  <%= @reservation.user_age %>
+</p>
+
+<p>
+  <b>Type de chambre:</b>
+  <%= @reservation.type_de_chambre %>
+</p>
+
+<p>
+  <b>Type de vue:</b>
+  <%= @reservation.type_de_vue %>
+</p>
+
+<p>
+  <b>Date arrive:</b>
+  <%= @reservation.date_arrive %>
+</p>
+
+<p>
+  <b>Date depart:</b>
+  <%= @reservation.date_depart %>
+</p>
+
+<p>
+  <b>Demande particuliere:</b>
+  <%= @reservation.demande_particuliere %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= @reservation.price %>
+</p>
+
+
+<%= link_to 'Edit', edit_reservation_path(@reservation) %> |
+<%= link_to 'Back', reservations_path %>

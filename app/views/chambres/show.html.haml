@@ -1,20 +1,24 @@
-%br
-%div.row
-  %div.col-lg-8.col-12
-    =image_tag("#{@chambre.image}", class: "chambre_img_details")
+%div.container
+  %br
+  %br
+  %div.row
+    %div.col-lg-8.col-12
+      =image_tag("#{@chambre.image}", class: "chambre_img_details")
 
-  %div.col-lg-4.col-12
-    %p.nom_details_chambre=@chambre.name
-    %span.nom_details_chambre_titre Type de chambre: 
-    %p.type_details_chambre=@chambre.type_chambre
-    %span.nom_details_chambre_titre Vue de la chambre:
-    %p.vue_details_chambre=@chambre.vue 
-    -if current_user.admin?  
-      %span=link_to 'Edit', edit_chambre_path(@chambre), :class => "btn btn-primary white" 
-    %span=link_to 'Back', chambres_path, :class => "btn btn-secondary white"
+    %div.col-lg-4.col-12
+      %p.nom_details_chambre=@chambre.name
+      %span.nom_details_chambre_titre Type de chambre: 
+      %p.type_details_chambre=@chambre.type_chambre
+      %span.nom_details_chambre_titre Vue de la chambre:
+      %p.vue_details_chambre=@chambre.vue 
+      //%p.vue_details_chambre=@chambre.numero 
+      -if current_user.admin?  
+        %span=link_to 'Modifier', edit_chambre_path(@chambre), :class => "btn btn-primary white" 
+      %span=link_to 'Retour', chambres_path, :class => "btn btn-secondary white"
 
-    %br
-    %br
-    %br
-    %p.nom_details_chambre Reservation
+      %br
+      %br
+      %br
+      %p.nom_details_chambre Reservation
+      -# =render 'reservations/form'
     

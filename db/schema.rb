@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20190129211839) do
+ActiveRecord::Schema.define(:version => 20190130193028) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -39,7 +39,27 @@ ActiveRecord::Schema.define(:version => 20190129211839) do
     t.datetime "updated_at",                                 :null => false
     t.string   "image"
     t.decimal  "price",        :precision => 8, :scale => 2
+    t.integer  "numero"
   end
+
+  create_table "reservations", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "chambre_id"
+    t.string   "user_name"
+    t.string   "user_email"
+    t.integer  "user_age"
+    t.string   "type_de_chambre"
+    t.string   "type_de_vue"
+    t.datetime "date_arrive"
+    t.datetime "date_depart"
+    t.text     "demande_particuliere"
+    t.decimal  "price"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  add_index "reservations", ["chambre_id"], :name => "index_reservations_on_chambre_id"
+  add_index "reservations", ["user_id"], :name => "index_reservations_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false

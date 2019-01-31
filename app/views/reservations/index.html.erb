@@ -3,7 +3,7 @@
 <table>
   <tr>
     <th>User</th>
-    <th>Chambre</th>
+    <th>Chambre reserve</th>
     <th>User name</th>
     <th>User email</th>
     <th>User age</th>
@@ -20,8 +20,8 @@
 
 <% @reservations.each do |reservation| %>
   <tr>
-    <td><%= reservation.user %></td>
-    <td><%= reservation.chambre %></td>
+    <td><%= reservation.user_id %></td>
+    <td><%= reservation.chambre_reserve_id %></td>
     <td><%= reservation.user_name %></td>
     <td><%= reservation.user_email %></td>
     <td><%= reservation.user_age %></td>

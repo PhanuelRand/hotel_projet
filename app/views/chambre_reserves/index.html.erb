@@ -1,0 +1,23 @@
+<h1>Listing chambre_reserves</h1>
+
+<table>
+  <tr>
+    <th>Chambre</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @chambre_reserves.each do |chambre_reserf| %>
+  <tr>
+    <td><%= chambre_reserf.chambre_id %></td>
+    <td><%= link_to 'Show', chambre_reserf %></td>
+    <td><%= link_to 'Edit', edit_chambre_reserf_path(chambre_reserf) %></td>
+    <td><%= link_to 'Destroy', chambre_reserf, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Chambre reserve', new_chambre_reserf_path %>

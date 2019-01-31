@@ -24,8 +24,10 @@ class ReservationsController < ApplicationController
   def create
     # @reservation = Reservation.new(params[:reservation])
     @reservation = current_user.reservations.build(params[:reservation])
-    @reservation.save
-    respond_with(@reservation)
+    if @reservation.save
+      flash[:success] = "Micropost created!"
+      respond_with(@reservation)
+    end
   end
 
   def update

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20190130193028) do
+ActiveRecord::Schema.define(:version => 20190131145347) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -31,6 +31,14 @@ ActiveRecord::Schema.define(:version => 20190130193028) do
   add_index "admins", ["email"], :name => "index_admins_on_email", :unique => true
   add_index "admins", ["reset_password_token"], :name => "index_admins_on_reset_password_token", :unique => true
 
+  create_table "chambre_reserves", :force => true do |t|
+    t.integer  "chambre_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "chambre_reserves", ["chambre_id", "created_at"], :name => "index_chambre_reserves_on_chambre_id_and_created_at"
+
   create_table "chambres", :force => true do |t|
     t.string   "name"
     t.string   "type_chambre"
@@ -44,7 +52,7 @@ ActiveRecord::Schema.define(:version => 20190130193028) do
 
   create_table "reservations", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "chambre_id"
+    t.integer  "chambre_reserve_id"
     t.string   "user_name"
     t.string   "user_email"
     t.integer  "user_age"
@@ -58,8 +66,8 @@ ActiveRecord::Schema.define(:version => 20190130193028) do
     t.datetime "updated_at",           :null => false
   end
 
-  add_index "reservations", ["chambre_id"], :name => "index_reservations_on_chambre_id"
-  add_index "reservations", ["user_id"], :name => "index_reservations_on_user_id"
+  add_index "reservations", ["chambre_reserve_id", "created_at"], :name => "index_reservations_on_chambre_reserve_id_and_created_at"
+  add_index "reservations", ["user_id", "created_at"], :name => "index_reservations_on_user_id_and_created_at"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false

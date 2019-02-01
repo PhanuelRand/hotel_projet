@@ -19,13 +19,14 @@ class ReservationsController < ApplicationController
   end
 
   def edit
+    @reservation = Reservation.find(params[:id])
   end
 
   def create
-    # @reservation = Reservation.new(params[:reservation])
-    @reservation = current_user.reservations.build(params[:reservation])
+    params[:reservation][:user_id] = current_user.id
+    @reservation = Reservation.new(params[:reservation])
     if @reservation.save
-      flash[:success] = "Micropost created!"
+      flash[:success] = "Reservation created!"
       respond_with(@reservation)
     end
   end
@@ -37,7 +38,8 @@ class ReservationsController < ApplicationController
 
   def destroy
     @reservation.destroy
-    respond_with(@reservation)
+    # respond_with(@reservation)
+    # redirect_to (current_user)
   end
 
   private

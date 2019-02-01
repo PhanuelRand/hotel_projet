@@ -21,7 +21,8 @@ class ChambreReservesController < ApplicationController
   end
 
   def create
-    @chambre_reserf = ChambreReserve.new(params[:chambre_reserve])
+    # @chambre_reserf = ChambreReserve.new(params[:chambre_reserve])
+    @chambre_reserf = Chambre.chambre_reserf.build(params[:chambre_reserf])
     @chambre_reserf.save
     respond_with(@chambre_reserf)
   end

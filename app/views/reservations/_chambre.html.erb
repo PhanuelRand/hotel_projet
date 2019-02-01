@@ -1,0 +1,35 @@
+<hr />
+<%= form_for(@reservation) do |f| %>
+    <div class="field">
+      <%= f.label :chambre %><br />
+        <select name="category_id" class="form-control">
+          <div id="num_chambre" style="visibility: hidden"><% Chambre.where(type_chambre: "Simple").find_each do |chambre| %></div>
+             <option value="<%= chambre.id %>"><%= chambre.numero %></option>
+          <% end %>
+        </select>
+    </div>
+
+    <div class="field">
+        <%= f.label :type_de_chambre %><br />
+        <select id="type_chambre" class="form-control" name="reservation[type_de_chambre]">
+            <option value="None">Choississez le type de chambre</option>
+            <option value="Simple">Simple</option>
+            <option value="Double">Double</option>
+            <option value="Executive">Executive</option>
+            <option value="Presidentielle">Presidentielle</option>
+        </select>
+    </div>
+    <div class="field">
+        <%= f.label :type_de_vue %><br />
+            <select id="type_vue" class="form-control" name="reservation[type_de_vue]">
+            <option value="None">Choississez la vue de votre chambre</option>
+            <option value="Jungle">Jungle</option>
+            <option value="Mer">Mer</option>
+        </select>
+    </div>
+     <div class="field">
+        <%= f.label :price %><br />
+        <%= f.number_field :price, class: "form-control", id: "price_reservation", name: "reservation[price]" %> <p id="dollar_sign"> $</p>
+    </div>
+<% end %>
+<hr />

@@ -2,8 +2,7 @@
   %br
   %div.row
     %div.col-12
-      %h2.titre_profil Bonjour, #{@user.email}
+      %h2.titre_profil Bonjour, #{current_user.email}
       %hr
       %h3 Voici vos reservations
-      %hr
       =render 'reservations/index'

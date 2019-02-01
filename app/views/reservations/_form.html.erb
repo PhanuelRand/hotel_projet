@@ -11,15 +11,10 @@
     </div>
   <% end %>
 
-  <%# <div class="field">
-    <%= f.label :user <br />
-    <%= f.text_field :user
-  </div> %>
-  <%# <% @reservations.each do |reservation| %>
-  
   <div class="field">
     <%= f.label :type_de_chambre %><br />
-    <select id="type_chambre" class="form-control">
+    <select id="type_chambre" class="form-control" name="reservation[type_de_chambre]">
+      <option value="None">Choississez le type de chambre</option>
       <option value="Simple">Simple</option>
       <option value="Double">Double</option>
       <option value="Executive">Executive</option>
@@ -28,7 +23,8 @@
   </div>
   <div class="field">
     <%= f.label :type_de_vue %><br />
-    <select id="type_vue" class="form-control">
+    <select id="type_vue" class="form-control" name="reservation[type_de_vue]">
+    <option value="None">Choississez la vue de votre chambre</option>
       <option value="Jungle">Jungle</option>
       <option value="Mer">Mer</option>
     </select>
@@ -36,6 +32,7 @@
   <div class="field">
     <%= f.label :nombre_de_chambres %><br />
     <select id="nb_chambre" class="form-control">
+      <option value="None">Choississez le nombre de chambre</option>
       <option value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>
@@ -44,68 +41,52 @@
     </select>
   </div>
 
-  <div class="field">
-    <%= f.label :chambre %><br />
-      <select name="category_id" class="form-control" name="numero_chambre">
-        <div id="num_chambre" style="visibility: hidden"><% Chambre.where(type_chambre: "Simple").find_each do |chambre| %></div>
-           <option value="<%= chambre.id %>"><%= chambre.numero %></option>
-        <% end %>
-      </select>
-  </div>
+  <p class="btn btn-success" id="show_details">Rechercher</p>
+  <p style="color: red; display: none;" id="alert_form">Veuillez selectionner tous les criteres!</p>
 
+  <span id="reservation_show" style="display: none;">
+  <%= render 'chambre' %>
+    <!-- <div class="field">
+      <%= f.label :chambre %><br />
+        <select name="category_id" class="form-control">
+          <div id="num_chambre" style="visibility: hidden"><% Chambre.where(type_chambre: "Simple").find_each do |chambre| %></div>
+             <option value="<%= chambre.id %>"><%= chambre.numero %></option>
+          <% end %>
+        </select> 
+    </div>-->
 
+    <div class="field">
+      <%= f.label :user_name %><br />
+      <%= f.text_field :user_name, class: "form-control" %>
+    </div>
+    <div class="field">
+      <%= f.label :user_email %><br />
+      <%= f.text_field :user_email, {:class => "form-control", :value => current_user.email} %>
+    </div>
+    <div class="field">
+      <%= f.label :user_age %><br />
+      <%= f.number_field :user_age, class: "form-control" %>
+    </div>
 
-
-   <!--<div id="num_chambre" style="display:none;"><%= render 'first' %></div>
- <div class="field">
-    <%= f.label :chambre %><br />
-     <select name="category_id" class="form-control" name="numero_chambre">
-      <% @chambres.each do |chambre| %>
-        <% if chambre.type_chambre == 'Simple'%>
-           <option value="<%= chambre.id %>"><%= chambre.numero if chambre.type_chambre == 'Simple' %></option>
-        <% end %>
-      <% end %>
-    </select>
-    <%# <%= f.collection_select(:chambre_reserve_id, @chambres, :id, :name, :include_blank => "Please select") %> 
-    <%# <%= select_tag('chambre_drop', options_for_select(@chambres.collect{ |u| [u.numero, u.type_chambre] }), { class: "form-control"}) %>
-  </div> -->
-  <div class="field">
-    <%= f.label :user_name %><br />
-    <%= f.text_field :user_name, class: "form-control" %>
-  </div>
-  <div class="field">
-    <%= f.label :user_email %><br />
-    <%= f.text_field :user_email, {:class => "form-control", :value => current_user.email} %>
-  </div>
-  <div class="field">
-    <%= f.label :user_age %><br />
-    <%= f.number_field :user_age, class: "form-control" %>
-  </div>
-  <!-- <div class="field">
-    <%= f.label :type_de_chambre %><br />
-    <%= f.text_field :type_de_chambre, class: "form-control" %>
-  </div>
-  <div class="field">
-    <%= f.label :type_de_vue %><br />
-    <%= f.text_field :type_de_vue, class: "form-control" %>
-  </div> -->
-  <div class="field">
-    <%= f.label :date_arrive %><br />
-    <%= f.datetime_select :date_arrive, class: "form-control" %>
-  </div>
-  <div class="field">
-    <%= f.label :date_depart %><br />
-    <%= f.datetime_select :date_depart, class: "form-control" %>
-  </div>
-  <div class="field">
-    <%= f.label :demande_particuliere %><br />
-    <%= f.text_area :demande_particuliere, class: "form-control" %>
-  </div>
-  <div class="field">
-    <%= f.label :price %><br />
-    <%= f.text_field :price, class: "form-control" %>
-  </div>
-  <div class="actions">
-    <%= f.submit "Valider", class: "btn btn-primary" %>
-  </div>
-<% end %>
+    <div class="field">
+      <%= f.label :date_arrive %><br />
+      <%= f.datetime_select :date_arrive, class: "form-control" %>
+    </div>
+    <div class="field">
+      <%= f.label :date_depart %><br />
+      <%= f.datetime_select :date_depart, class: "form-control" %>
+    </div>
+    <div class="field">
+      <%= f.label :demande_particuliere %><br />
+      <%= f.text_area :demande_particuliere, class: "form-control", rows: "5" %>
+    </div>
+    <div class="field">
+      <%= f.label :price %><br />
+      <%= f.number_field :price, class: "form-control", id: "price_reservation", name: "reservation[price]" %> <p id="dollar_sign"> $</p>
+    </div>
+    <br />
+    <div class="actions">
+      <%= f.submit "Valider", class: "btn btn-primary confirmation" %>
+    </div>
+  </span>
+  <% end %>

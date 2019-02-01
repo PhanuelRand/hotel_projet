@@ -1,0 +1,82 @@
+<%# <h1>Listes des reservations</h1> %>
+<% if current_user.admin == false %>
+  <% @reservations.each do |reservation| %>
+    <% if current_user.email == reservation.user_email %>
+      <table class="table table-striped">
+        <tr class="thead-dark">
+          <th>Reservation ID</th>
+          <th>User ID</th>
+          <th>Chambre reserve</th>
+          <th>Email</th>
+          <th>Age</th>
+          <th>Type de chambre</th>
+          <th>Type de vue</th>
+          <th>Date arrive</th>
+          <th>Date depart</th>
+          <th>Demande particuliere</th>
+          <th>Price</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <td><%= reservation.id %></td>
+          <td><%= reservation.user_id %></td>
+            <td><%= reservation.chambre_reserve_id %></td>
+          <td><%= reservation.user_email %></td>
+          <td><%= reservation.user_age %></td>
+          <td><%= reservation.type_de_chambre %></td>
+          <td><%= reservation.type_de_vue %></td>
+          <td><%= reservation.date_arrive %></td>
+          <td><%= reservation.date_depart %></td>
+          <td><%= reservation.demande_particuliere %></td>
+          <td><%= reservation.price %></td>
+          <!--<td><%= link_to 'Show', reservation %></td>
+          <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>
+          <td><%= link_to 'Destroy', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>--> 
+        </tr>    
+      </table>
+    <% end %>  
+  <% end %>  
+<% else %>
+  <table class="table table-striped">
+    <tr class="thead-dark">
+      <th>Reservation ID</th>
+      <th>User ID</th>
+      <th>Chambre reserve</th>
+      <th>Email</th>
+      <th>Age</th>
+      <th>Type de chambre</th>
+      <th>Type de vue</th>
+      <th>Date arrive</th>
+      <th>Date depart</th>
+      <th>Demande particuliere</th>
+      <th>Price</th>
+      <%# <th></th> %>
+      <th></th>
+      <th></th>
+    </tr>
+
+    <% @reservations.each do |reservation| %>
+      <tr>
+        <td><%= reservation.id %></td>
+        <td><%= reservation.user_id %></td>
+         <td><%= reservation.chambre_reserve_id %></td>
+        <td><%= reservation.user_email %></td>
+        <td><%= reservation.user_age %></td>
+        <td><%= reservation.type_de_chambre %></td>
+        <td><%= reservation.type_de_vue %></td>
+        <td><%= reservation.date_arrive %></td>
+        <td><%= reservation.date_depart %></td>
+        <td><%= reservation.demande_particuliere %></td>
+        <td><%= reservation.price %></td>
+        <%# <td><%= link_to 'Show', reservation %>
+        <td><%= link_to 'Edit', edit_reservation_path(reservation), style: "color: green !important;" %></td>
+        <td><%= link_to 'Destroy', reservation, style: "color: red !important;", method: :delete, data: { confirm: 'Are you sure?' } %></td> 
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<hr />
+<%= link_to 'Nouvelle Reservation', new_reservation_path, class: "btn btn-primary white" %>

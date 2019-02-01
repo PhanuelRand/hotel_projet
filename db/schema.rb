@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20190131145347) do
+ActiveRecord::Schema.define(:version => 20190201182113) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -33,8 +33,9 @@ ActiveRecord::Schema.define(:version => 20190131145347) do
 
   create_table "chambre_reserves", :force => true do |t|
     t.integer  "chambre_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "reservation_id"
   end
 
   add_index "chambre_reserves", ["chambre_id", "created_at"], :name => "index_chambre_reserves_on_chambre_id_and_created_at"

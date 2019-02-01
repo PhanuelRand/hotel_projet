@@ -21,7 +21,11 @@
             <a class="nav-link white" href="/home">Acceuil</a>
           </li>
           <li class="nav-item">
-            <%= link_to "Profil", current_user, class: "nav-link white" %>
+            <% if current_user.admin == false %>
+              <%= link_to "Profil", current_user, class: "nav-link white" %>
+            <% else %>
+              <%= link_to "Admin Page", current_user, class: "nav-link white" %>
+            <% end %>
           </li>
           <li class="nav-item">
             <a class="nav-link white" href='/users/sign_out' data-method='delete'>Deconnexion</a>

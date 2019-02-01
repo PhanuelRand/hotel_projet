@@ -6,16 +6,57 @@ jQuery ->
     $( "#nb_chambre" ).change ->
         console.log(this.value);
 
+    type_vue = 0;
+    type_chambre = 0;
+    prix_total = 0;
+    nb_chambre = 0;
+
     $( "#type_chambre" ).change ->
-        console.log(this.value);    
+        console.log(this.value);  
+        $("#alert_form").fadeOut(); 
+         
         if (this.value) is "Simple"
             $("#num_chambre").hide();
+            type_chambre = 250;
         else if (this.value) is "Double"
             $("#num_chambre").hide();
+            type_chambre = 500;
         else if (this.value) is "Executive"
             $("#num_chambre").hide();
+            type_chambre = 750;
         else if (this.value) is "Presidentielle"
             $("#num_chambre").show();
+            type_chambre = 1000;
+
+
+    $( "#type_vue" ).change ->
+        console.log(this.value);
+        $("#alert_form").fadeOut(); 
+
+        if (this.value) is "Jungle"
+            type_vue = 100; 
+
+        else  if (this.value) is "Mer"
+            type_vue = 200;
+
+
+    $( "#nb_chambre" ).change ->
+        console.log(this.value);
+        $("#alert_form").fadeOut(); 
+        nb_chambre = parseInt( this.value, 10 );
+        prix_total = type_chambre + type_vue * nb_chambre
+
+
+    $(document).on "click", "#show_details", ->
+        console.log(prix_total);
+        if prix_total != 0
+            prix_total = type_chambre + type_vue * nb_chambre
+            $("#reservation_show").fadeIn();
+            $("#price_reservation").val(prix_total);
+        
+        else
+            console.log("null");
+            $("#alert_form").fadeIn();
 
 
 

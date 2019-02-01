@@ -1,6 +1,8 @@
-<h1>Editing reservation</h1>
+<div class="container">
+    <h1>Editing reservation</h1>
 
-<%= render 'form' %>
+    <%= render 'form' %>
 
-<%= link_to 'Show', @reservation %> |
-<%= link_to 'Back', reservations_path %>
+    <%# <%= link_to 'Show', @reservation %>
+    <%= link_to 'Back', current_user, class: "btn btn-secondary white" %>
+</div>

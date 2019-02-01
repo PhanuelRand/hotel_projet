@@ -42,14 +42,14 @@
                         %div.col-lg-12.col-12 
                             %span=link_to 'Details', chambre, :class => "btn btn-primary white" 
                             -if signed_in?
-                                -if current_user.admin == false 
-                                    %span=link_to 'Reserver', chambre, :class => "btn btn-info white"
+                                %span=link_to 'Reserver', new_reservation_path, :class => "btn btn-info white"
 
                     
                     -if signed_in?
                         -if current_user.admin?
                             %div.row
-                                %div.col-lg-6.col-12 
-                                    %p=link_to 'Modifier', edit_chambre_path(chambre), :class => "btn btn-success white"
-                                    %p=link_to 'Supprimer', chambre, :method => :delete, :data => {:confirm => "Voulez vous vraiment supprimer cette chambre?" }, :class => "btn btn-danger white"
+                                %div.col-lg-12.col-12 
+                                    %br
+                                    %span=link_to 'Modifier', edit_chambre_path(chambre), :class => "btn btn-success white"
+                                    %span=link_to 'Supprimer', chambre, :method => :delete, :data => {:confirm => "Voulez vous vraiment supprimer cette chambre?" }, :class => "btn btn-danger white"
 

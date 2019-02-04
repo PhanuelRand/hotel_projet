@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <!--<div class="field">
     <%= f.label :type_de_chambre %><br />
     <select id="type_chambre" class="form-control" name="reservation[type_de_chambre]">
       <option value="None">Choississez le type de chambre</option>
@@ -28,7 +28,7 @@
       <option value="Jungle">Jungle</option>
       <option value="Mer">Mer</option>
     </select>
-  </div>
+  </div> -->
   <div class="field">
     <%= f.label :nombre_de_chambres %><br />
     <select id="nb_chambre" class="form-control">
@@ -45,7 +45,10 @@
   <p style="color: red; display: none;" id="alert_form">Veuillez selectionner tous les criteres!</p>
 
   <span id="reservation_show" style="display: none;">
-  <%= render 'chambre' %>
+  <hr style="border: 2px solid #777;" />
+  <% (1..2).each do |i| %>
+    <%= render 'chambre' %>
+  <% end %>
     <!-- <div class="field">
       <%= f.label :chambre %><br />
         <select name="category_id" class="form-control">
@@ -53,7 +56,10 @@
              <option value="<%= chambre.id %>"><%= chambre.numero %></option>
           <% end %>
         </select> 
+    </div> <div class="field">
+       <%= f.hidden_field :reservation_chambre_id , :value => :reservation_chambre_id %>
     </div>-->
+    
 
     <div class="field">
       <%= f.label :user_name %><br />

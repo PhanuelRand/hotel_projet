@@ -24,11 +24,20 @@ class ReservationsController < ApplicationController
 
   def create
     params[:reservation][:user_id] = current_user.id
-    @reservation = Reservation.new(params[:reservation])
+    puts params.inspect
+    @reservation = Reservation.create(params[:reservation])
+    @chambres = Chambre.all
+    
+    @chambres.each do |chambre|
+      @reservation_chambre = ReservationChambre.create({reservation_id: @reservation.id, chambre_id: chambre.id})
+    end
+
     if @reservation.save
       flash[:success] = "Reservation created!"
       respond_with(@reservation)
     end
+    # 1) Get ID of all rooms
+    # 2) For each room ID, create ReservationChambre entry with : reservation_id, room_id
   end
 
   def update
@@ -39,10 +48,14 @@ class ReservationsController < ApplicationController
   def destroy
     @reservation.destroy
     # respond_with(@reservation)
-    # redirect_to (current_user)
+    redirect_to (current_user)
   end
 
   private
+    # def reservation_params
+    #   params.require(:reservation).permit(:reservation_chambre_id, :date_arrive.to_sym, :date_depart.to_sym, :demande_particuliere, :price, :type_de_chambre, :type_de_vue, :user_age, :user_email, :user_id, :user_name)
+    # end
+
     def set_reservation
       @reservation = Reservation.find(params[:id])
     end

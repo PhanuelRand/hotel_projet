@@ -7,7 +7,7 @@
 
 <p>
   <b>Chambre reserve:</b>
-  <%= @reservation.chambre_reserve_id %>
+  <%= @reservation.reservation_chambre_id %>
 </p>
 
 <p>
@@ -57,4 +57,4 @@
 
 
 <%= link_to 'Edit', edit_reservation_path(@reservation) %> |
-<%= link_to 'Back', reservations_path %>
+<%= link_to 'Back', current_user %>

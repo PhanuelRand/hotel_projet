@@ -5,8 +5,7 @@
       <table class="table table-striped">
         <tr class="thead-dark">
           <th>Reservation ID</th>
-          <th>User ID</th>
-          <th>Chambre reserve</th>
+          <th>Chambres reserves</th>
           <th>Email</th>
           <th>Age</th>
           <th>Type de chambre</th>
@@ -21,20 +20,28 @@
         </tr>
         <tr>
           <td><%= reservation.id %></td>
-          <td><%= reservation.user_id %></td>
-            <td><%= reservation.chambre_reserve_id %></td>
+          <td style="width: 100px;">
+              <% reservation.reservation_chambres.each do |r| %>
+                <%= r.chambre.numero %>
+              <% end %>
+          </td>
           <td><%= reservation.user_email %></td>
           <td><%= reservation.user_age %></td>
-          <td><%= reservation.type_de_chambre %></td>
-          <td><%= reservation.type_de_vue %></td>
+          <td style="width: 100px;">
+              <% reservation.reservation_chambres.each do |r| %>
+                <%= r.chambre.type_chambre %>
+              <% end %>
+          </td>
+          <td style="width: 50px;">
+              <% reservation.reservation_chambres.each do |r| %>
+                <%= r.chambre.vue %>
+              <% end %>
+          </td>
           <td><%= reservation.date_arrive %></td>
           <td><%= reservation.date_depart %></td>
           <td><%= reservation.demande_particuliere %></td>
           <td><%= reservation.price %></td>
-          <!--<td><%= link_to 'Show', reservation %></td>
-          <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>
-          <td><%= link_to 'Destroy', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>--> 
-        </tr>    
+        </tr>   
       </table>
     <% end %>  
   <% end %>  
@@ -42,8 +49,7 @@
   <table class="table table-striped">
     <tr class="thead-dark">
       <th>Reservation ID</th>
-      <th>User ID</th>
-      <th>Chambre reserve</th>
+      <th>Chambres reserves</th>
       <th>Email</th>
       <th>Age</th>
       <th>Type de chambre</th>
@@ -52,7 +58,7 @@
       <th>Date depart</th>
       <th>Demande particuliere</th>
       <th>Price</th>
-      <%# <th></th> %>
+      <th></th>
       <th></th>
       <th></th>
     </tr>
@@ -61,11 +67,23 @@
       <tr>
         <td><%= reservation.id %></td>
         <td><%= reservation.user_id %></td>
-         <td><%= reservation.chambre_reserve_id %></td>
+        <td style="width: 100px;">
+            <% reservation.reservation_chambres.each do |r| %>
+              <%= r.chambre.numero %>
+            <% end %>
+        </td>
         <td><%= reservation.user_email %></td>
         <td><%= reservation.user_age %></td>
-        <td><%= reservation.type_de_chambre %></td>
-        <td><%= reservation.type_de_vue %></td>
+         <td style="width: 100px;">
+            <% reservation.reservation_chambres.each do |r| %>
+              <%= r.chambre.type_chambre %>
+            <% end %>
+        </td>
+         <td style="width: 50px;">
+            <% reservation.reservation_chambres.each do |r| %>
+              <%= r.chambre.vue %>
+            <% end %>
+        </td>
         <td><%= reservation.date_arrive %></td>
         <td><%= reservation.date_depart %></td>
         <td><%= reservation.demande_particuliere %></td>

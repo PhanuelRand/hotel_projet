@@ -44,7 +44,8 @@ jQuery ->
         console.log(this.value);
         $("#alert_form").fadeOut(); 
         nb_chambre = parseInt( this.value, 10 );
-        prix_total = nb_chambre
+        prix_total = nb_chambre       
+            # <%= render 'chambre' %>
 
 
     $(document).on "click", "#show_details", ->
@@ -52,7 +53,13 @@ jQuery ->
         if prix_total != 0
             prix_total = nb_chambre
             $("#reservation_show").fadeIn();
-            $("#price_reservation").val(prix_total);
+            # $("#price_reservation").val(prix_total);
+
+            for i in [0...nb_chambre]
+                $( ".num_ch" ).append("Chambre #" + (i+1))
+                # $( ".render_chambre" ).raw("<% render 'chambre' %> <br />");
+
+
         
         else
             console.log("null");

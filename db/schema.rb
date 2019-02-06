@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20190204204249) do
+ActiveRecord::Schema.define(:version => 20190206183828) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -60,8 +60,10 @@ ActiveRecord::Schema.define(:version => 20190204204249) do
     t.datetime "date_depart"
     t.text     "demande_particuliere"
     t.decimal  "price"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.datetime "created_at",                                       :null => false
+    t.datetime "updated_at",                                       :null => false
+    t.string   "numero_chambres",        :default => "'--- []\n'"
+    t.string   "list_chambres"
   end
 
   create_table "users", :force => true do |t|

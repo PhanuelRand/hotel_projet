@@ -10,7 +10,7 @@ HotelProjet::Application.routes.draw do\
   resources :chambres
   resources :reservations
   resources :users, only: [:show]
-
+  
   #match '/profile',  to: 'users/:id'
   #match 'users/:id' => 'users#show', via: :get
 

@@ -14,9 +14,6 @@
           <th>Date depart</th>
           <th>Demande particuliere</th>
           <th>Price</th>
-          <th></th>
-          <th></th>
-          <th></th>
         </tr>
         <tr>
           <td><%= reservation.id %></td>
@@ -49,6 +46,7 @@
   <table class="table table-striped">
     <tr class="thead-dark">
       <th>Reservation ID</th>
+      <th>User ID</th>
       <th>Chambres reserves</th>
       <th>Email</th>
       <th>Age</th>
@@ -58,7 +56,6 @@
       <th>Date depart</th>
       <th>Demande particuliere</th>
       <th>Price</th>
-      <th></th>
       <th></th>
       <th></th>
     </tr>
@@ -88,7 +85,6 @@
         <td><%= reservation.date_depart %></td>
         <td><%= reservation.demande_particuliere %></td>
         <td><%= reservation.price %></td>
-        <%# <td><%= link_to 'Show', reservation %>
         <td><%= link_to 'Edit', edit_reservation_path(reservation), style: "color: green !important;" %></td>
         <td><%= link_to 'Destroy', reservation, style: "color: red !important;", method: :delete, data: { confirm: 'Are you sure?' } %></td> 
       </tr>

@@ -23,11 +23,14 @@ class ReservationsController < ApplicationController
   end
 
   def create
+    # prix_total = 0
     params[:reservation][:user_id] = current_user.id
-    puts params.inspect
+    # params[:reservation][:price] = prix_total
+    lists_chambres = []
     @reservation = Reservation.create(params[:reservation])
-    @chambres = Chambre.all
-    
+  
+    @list_chambre = @reservation.list_chambres
+    @chambres = Chambre.where(numero: @list_chambre)
     @chambres.each do |chambre|
       @reservation_chambre = ReservationChambre.create({reservation_id: @reservation.id, chambre_id: chambre.id})
     end
@@ -53,7 +56,8 @@ class ReservationsController < ApplicationController
 
   private
     # def reservation_params
-    #   params.require(:reservation).permit(:reservation_chambre_id, :date_arrive.to_sym, :date_depart.to_sym, :demande_particuliere, :price, :type_de_chambre, :type_de_vue, :user_age, :user_email, :user_id, :user_name)
+    #   params[:reservation][:type_de_chambre] || = []
+    #   params.require(:reservation).permit(:reservation_chambre_id, :date_arrive, :date_depart, :demande_particuliere, :price, :type_de_chambre [], :type_de_vue, :user_age, :user_email, :user_id, :user_name)
     # end
 
     def set_reservation

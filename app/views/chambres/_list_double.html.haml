@@ -1,0 +1,31 @@
+- @chambre_double.each do |chambre|
+    %div.col-lg-4.col-12#chambre_type
+        %div.chambre_container 
+            =image_tag("#{chambre.image}", class: "chambre_img")
+            %span.nom_chambre=chambre.name
+            %br
+            %span.type_chambre_titre Type du chambre: 
+            %span.type_chambre=chambre.type_chambre
+            %br
+            %span.vue_chambre_titre Vue de la chambre: 
+            %span.vue_chambre=chambre.vue
+            %br
+            %span.price_chambre A partir de 
+            %span.price_chambre #{chambre.price} $
+            %br
+            %br
+            %div.row
+                %div.col-lg-12.col-12 
+                    %span=link_to 'Details', chambre, :class => "btn btn-primary white" 
+                    -if signed_in?
+                        %span=link_to 'Reserver', new_reservation_path, :class => "btn btn-info white"
+
+            
+            -if signed_in?
+                -if current_user.admin?
+                    %div.row
+                        %div.col-lg-12.col-12 
+                            %br
+                            %span=link_to 'Modifier', edit_chambre_path(chambre), :class => "btn btn-success white"
+                            %span=link_to 'Supprimer', chambre, :method => :delete, :data => {:confirm => "Voulez vous vraiment supprimer cette chambre?" }, :class => "btn btn-danger white"
+

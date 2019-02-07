@@ -3,6 +3,15 @@ HotelProjet::Application.routes.draw do\
 
   match '/home',  to: 'chambres#index'
 
+  match '/list_jungle' => 'chambres#list_jungle', :as => 'list_jungle'
+  match '/list_mer' => 'chambres#list_mer', :as => 'list_mer'
+
+  match '/list_all' => 'chambres#list_all', :as => 'list_all'
+  match '/list_simple' => 'chambres#list_simple', :as => 'list_simple'
+  match '/list_double' => 'chambres#list_double', :as => 'list_double'
+  match '/list_executive' => 'chambres#list_executive', :as => 'list_executive'
+  match '/list_presidentielle' => 'chambres#list_presidentielle', :as => 'list_presidentielle'
+
   devise_for :admins
 
   devise_for :users
@@ -10,9 +19,6 @@ HotelProjet::Application.routes.draw do\
   resources :chambres
   resources :reservations
   resources :users, only: [:show]
-  
-  #match '/profile',  to: 'users/:id'
-  #match 'users/:id' => 'users#show', via: :get
 
   devise_for :users, path: 'auth', path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'cmon_let_me_in' }
   devise_for :admins, path: 'auth', path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'cmon_let_me_in' }

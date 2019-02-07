@@ -15,7 +15,12 @@ class ReservationsController < ApplicationController
   def new
     @reservation = Reservation.new
     @chambres = Chambre.all
-    respond_with(@reservation)
+
+    # respond_with(@reservation)
+    respond_to do |format|
+      format.html
+      format.js {render layout: false}
+    end
   end
 
   def edit

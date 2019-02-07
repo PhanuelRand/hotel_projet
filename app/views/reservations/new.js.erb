@@ -1,0 +1,9 @@
+<%# $( "#nb_chambre" ).change(function() {
+    var nb_chambre = this.value;
+
+    for (int i = 0; i <= nb_chambre; i++)
+    {
+        console.log( "Handler for" );
+    }
+}); %>
+$("#render_chambre").append("<%= j render 'chambre' %>");

@@ -11,30 +11,15 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :nombre_de_chambres %><br />
-    <select id="nb_chambre" class="form-control">
-      <option value="None">Choississez le nombre de chambre</option>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-    </select>
-  </div>
-
-  <p class="btn btn-success" id="show_details">Rechercher</p>
-
-  <p style="color: red; display: none;" id="alert_form">Veuillez selectionner tous les criteres!</p>
-
-  <span id="reservation_show" style="display: none;">
+  <span id="reservation_show">
   <hr style="border: 2px solid #777;" />
 
-    <div>
-      <p class="num_ch"></p>
-      <p class="render_chambre"><%= render 'chambre' %><p>
-    </div> 
-
+    <div id="render_chambre" class="row" style="margin: 0 auto;">
+        <%= render 'chambre' %>
+    </div>
+    <hr style="border: 2px solid #777;" />
+    <p id="show_details"><%= link_to 'Ajouter une chambre', new_reservation_path, remote: true, class: "btn btn-success white show_details" %></p>
+  
     <div class="field">
       <%= f.label :user_name %><br />
       <%= f.text_field :user_name, class: "form-control" %>
@@ -62,7 +47,7 @@
     </div>
     <div class="field">
       <%= f.label :price %><br />
-      <%= f.number_field :price, class: "form-control", id: "price_reservation", name: "reservation[price]", value: "reservation[price]" %> <p id="dollar_sign"> $</p>
+      <%= f.number_field :price, class: "form-control", id: "price_reservation", name: "reservation[price]", value: "reservation[price]" %> <p class="dollar_sign"> $</p>
     </div>
     <br />
     <div class="actions">

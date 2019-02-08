@@ -13,7 +13,8 @@
           <th>Date arrive</th>
           <th>Date depart</th>
           <th>Demande particuliere</th>
-          <th>Price</th>
+          <th>Prix par chambre</th>
+          <th>Prix total</th>
         </tr>
         <tr>
           <td><%= reservation.id %></td>
@@ -37,7 +38,12 @@
           <td><%= reservation.date_arrive %></td>
           <td><%= reservation.date_depart %></td>
           <td><%= reservation.demande_particuliere %></td>
-          <td><%= reservation.price %></td>
+          <td style="width: 50px; text-align: right">
+            <% reservation.reservation_chambres.each do |r| %>
+              <%= r.chambre.vue_mer_price + r.chambre.vue_jungle_price + r.chambre.price %> $
+            <% end %>
+          </td>
+          <td style="text-align: right"><%= reservation.price %></td>
         </tr>   
       </table>
     <% end %>  
@@ -55,7 +61,8 @@
       <th>Date arrive</th>
       <th>Date depart</th>
       <th>Demande particuliere</th>
-      <th>Price</th>
+      <th>Prix par chambre</th>
+      <th>Prix total</th>
       <th></th>
       <th></th>
     </tr>
@@ -84,9 +91,14 @@
         <td><%= reservation.date_arrive %></td>
         <td><%= reservation.date_depart %></td>
         <td><%= reservation.demande_particuliere %></td>
-        <td><%= reservation.price %></td>
-        <td><%= link_to 'Edit', edit_reservation_path(reservation), style: "color: green !important;" %></td>
-        <td><%= link_to 'Destroy', reservation, style: "color: red !important;", method: :delete, data: { confirm: 'Are you sure?' } %></td> 
+        <td style="width: 50px; text-align: right">
+            <% reservation.reservation_chambres.each do |r| %>
+              <%= r.chambre.vue_mer_price + r.chambre.vue_jungle_price + r.chambre.price %> $
+            <% end %>
+        </td>
+        <td style="text-align: right"><%= reservation.price %></td>
+        <td><%= link_to 'Modifier', edit_reservation_path(reservation), style: "color: green !important;" %></td>
+        <td><%= link_to 'Supprimer', reservation, style: "color: red !important;", method: :delete, data: { confirm: 'Are you sure?' } %></td> 
       </tr>
     <% end %>
   </table>

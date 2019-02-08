@@ -28,17 +28,22 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    # prix_total = 0
+    prix_total = 1000
     params[:reservation][:user_id] = current_user.id
-    # params[:reservation][:price] = prix_total
-    lists_chambres = []
+
     @reservation = Reservation.create(params[:reservation])
-  
+
     @list_chambre = @reservation.list_chambres
     @chambres = Chambre.where(numero: @list_chambre)
     @chambres.each do |chambre|
       @reservation_chambre = ReservationChambre.create({reservation_id: @reservation.id, chambre_id: chambre.id})
     end
+
+    # params[:reservation][:price] = prix_total
+
+    # prix_total = @chambre.price
+
+    puts params.inspect
 
     if @reservation.save
       flash[:success] = "Reservation created!"

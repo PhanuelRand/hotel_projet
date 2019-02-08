@@ -11,7 +11,13 @@
       %p.type_details_chambre=@chambre.type_chambre
       %span.nom_details_chambre_titre Vue de la chambre:
       %p.vue_details_chambre=@chambre.vue 
-      //%p.vue_details_chambre=@chambre.numero 
+      %span.nom_details_chambre_titre Prix de base la chambre:
+      %p.vue_details_chambre=@chambre.price 
+      %span.nom_details_chambre_titre Prix de la vue:
+      -if @chambre.vue == "Jungle"
+        %p.vue_details_chambre=@chambre.vue_jungle_price
+      -else
+        %p.vue_details_chambre=@chambre.vue_mer_price 
       -if current_user.admin?  
         %span=link_to 'Modifier', edit_chambre_path(@chambre), :class => "btn btn-primary white" 
       %span=link_to 'Retour', chambres_path, :class => "btn btn-secondary white"

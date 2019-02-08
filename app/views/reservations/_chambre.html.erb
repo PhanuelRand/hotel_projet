@@ -3,30 +3,32 @@
     <hr />
     <div class="field">
         <span>Type de chambre</span><br />
-            <select id="type_chambre" class="form-control type_chambre">
-            <option value="None">Choississez le type de chambre</option>
-            <option value="Simple">Simple</option>
-            <option value="Double">Double</option>
-            <option value="Executive">Executive</option>
-            <option value="Presidentielle">Presidentielle</option>
-        </select>
+            <select class="form-control">
+                <option value="None">Choississez le type de chambre</option>
+                <div id="num_chambre" style="visibility: hidden"><% Chambre.select("DISTINCT(type_chambre)").each do |chambre| %></div>
+                    <option value="<%= chambre.type_chambre %>"><%= chambre.type_chambre %></option>
+                <% end %>
+            </select>
     </div>
 
     <div class="field">
         <span>Type de vue</span><br />
-            <select id="type_vue" class="form-control type_vue">
-            <option value="None">Choississez la vue de votre chambre</option>
-            <option value="Jungle">Jungle</option>
-            <option value="Mer">Mer</option>
-        </select>
+             <select class="form-control">
+             <option value="None">Choississez la vue de votre chambre</option>
+                <div id="num_chambre" style="visibility: hidden"><% Chambre.select("DISTINCT(VUE)").each do |chambre| %></div>
+                    <option value="<%= chambre.vue %>"><%= chambre.vue %></option>
+                <% end %>
+            </select>
     </div> 
 
     <div class="field">
         <span>Numero de chambre</span><br />
         <select class="form-control" name="reservation[list_chambres][]">
+        <option value="None">Choississez la chambre</option>
         <div id="num_chambre" style="visibility: hidden">
-            <%# <% Chambre.where(["type_chambre = ? and vue = ?", "Simple", "Mer"]).find_each do |chambre| %>
-            <% Chambre.where(vue: "Mer").find_each do |chambre| %></div>
+            <%# <% Chambre.where(["type_chambre = ? and vue = ?", "Double", "Jungle"]).find_each do |chambre| %>
+            <% Chambre.all.each do |chambre| %>
+            </div>
                <option value="<%= chambre.numero %>"><%= chambre.numero %></option>
             <% end %>
         </select>
@@ -34,7 +36,6 @@
 
     <div class="field">
         <span>Prix de la chambre</span><br />
-        <!-- <input name="reservation[price]" id="price_reservation" class="form-control"/> -->
         <p id="prix_par_chambre"><span id="price_reservation" class="prix_chambre"></span>  $</p> 
     </div>
 </div>

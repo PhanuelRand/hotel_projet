@@ -3,7 +3,7 @@
     <hr />
     <div class="field">
         <span>Type de chambre</span><br />
-            <select class="form-control">
+            <select id="type_chambre" class="form-control">
                 <option value="None">Choississez le type de chambre</option>
                 <div id="num_chambre" style="visibility: hidden"><% Chambre.select("DISTINCT(type_chambre)").each do |chambre| %></div>
                     <option value="<%= chambre.type_chambre %>"><%= chambre.type_chambre %></option>
@@ -13,31 +13,32 @@
 
     <div class="field">
         <span>Type de vue</span><br />
-             <select class="form-control">
-             <option value="None">Choississez la vue de votre chambre</option>
-                <div id="num_chambre" style="visibility: hidden"><% Chambre.select("DISTINCT(VUE)").each do |chambre| %></div>
-                    <option value="<%= chambre.vue %>"><%= chambre.vue %></option>
-                <% end %>
-            </select>
+            <select id="type_vue" class="form-control">
+            <option value="None">Choississez la vue de votre chambre</option>
+            <div id="num_chambre" style="visibility: hidden"><% Chambre.select("DISTINCT(VUE)").each do |chambre| %></div>
+                <option value="<%= chambre.vue %>"><%= chambre.vue %></option>
+            <% end %>
+        </select>
     </div> 
 
     <div class="field">
         <span>Numero de chambre</span><br />
-        <select class="form-control" name="reservation[list_chambres][]">
+        <select id="num_chr" class="form-control" name="reservation[list_chambres][]">
         <option value="None">Choississez la chambre</option>
         <div id="num_chambre" style="visibility: hidden">
-            <%# <% Chambre.where(["type_chambre = ? and vue = ?", "Double", "Jungle"]).find_each do |chambre| %>
-            <% Chambre.all.each do |chambre| %>
+            <% @chambres.each do |list| %>
             </div>
-               <option value="<%= chambre.numero %>"><%= chambre.numero %></option>
+               <option value="<%= list.numero %>"><%= list.numero %></option>
             <% end %>
         </select>
     </div>
 
     <div class="field">
         <span>Prix de la chambre</span><br />
-        <p id="prix_par_chambre"><span id="price_reservation" class="prix_chambre"></span>  $</p> 
+        <p id="prix_par_chambre"><span id="price_reservation" class="prix_chambre"></span></p> 
     </div>
 </div>
 
+<script>
 
+</script>

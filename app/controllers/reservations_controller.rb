@@ -16,7 +16,6 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.new
     @chambres = Chambre.all
 
-    # respond_with(@reservation)
     respond_to do |format|
       format.html
       format.js {render layout: false}
@@ -28,7 +27,10 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    prix_total = 1000
+    prix_total = 0
+    price_chambres = 0
+    price_vue_jungle = 0
+    price_vue_mer = 0
     params[:reservation][:user_id] = current_user.id
 
     @reservation = Reservation.create(params[:reservation])
@@ -37,20 +39,38 @@ class ReservationsController < ApplicationController
     @chambres = Chambre.where(numero: @list_chambre)
     @chambres.each do |chambre|
       @reservation_chambre = ReservationChambre.create({reservation_id: @reservation.id, chambre_id: chambre.id})
+
+      price_chambres += @chambres.where(:type_chambre => chambre.type_chambre).sum(:price)
+      price_vue_jungle += @chambres.where(["type_chambre = ? and vue = ?", chambre.type_chambre, "Jungle"]).sum(:vue_jungle_price)
+      price_vue_mer += @chambres.where(["type_chambre = ? and vue = ?", chambre.type_chambre, "Mer"]).sum(:vue_mer_price)
     end
 
-    # params[:reservation][:price] = prix_total
-
-    # prix_total = @chambre.price
-
-    puts params.inspect
+    @reservation.update_attributes(:price => (price_chambres + price_vue_jungle + price_vue_mer))
 
     if @reservation.save
       flash[:success] = "Reservation created!"
       respond_with(@reservation)
     end
-    # 1) Get ID of all rooms
-    # 2) For each room ID, create ReservationChambre entry with : reservation_id, room_id
+  end
+
+  def show_filtered_room
+    type_chambre = params[:type_chambre]
+    type_vue = params[:type_vue]
+
+    # TODO: pas beau ewww a refaire
+    if type_chambre == "None" && type_vue == "None"
+      @chambres_filtered = Chambre.all
+    else
+      if type_chambre == "None" && type_vue != "None"
+        @chambres_filtered = Chambre.where(type_vue: type_vue)
+      elsif type_chambre != "None" && type_vue == "None"
+        @chambres_filtered = Chambre.where(type_chambre: type_chambre)
+      else
+        @chambres_filtered = Chambre.where(["type_chambre = ? and vue = ?", type_chambre, type_vue])
+      end
+    end
+
+    render json: @chambres_filtered
   end
 
   def update
@@ -60,16 +80,10 @@ class ReservationsController < ApplicationController
 
   def destroy
     @reservation.destroy
-    # respond_with(@reservation)
     redirect_to (current_user)
   end
 
   private
-    # def reservation_params
-    #   params[:reservation][:type_de_chambre] || = []
-    #   params.require(:reservation).permit(:reservation_chambre_id, :date_arrive, :date_depart, :demande_particuliere, :price, :type_de_chambre [], :type_de_vue, :user_age, :user_email, :user_id, :user_name)
-    # end
-
     def set_reservation
       @reservation = Reservation.find(params[:id])
     end

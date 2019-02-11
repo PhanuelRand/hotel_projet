@@ -18,19 +18,19 @@
         </tr>
         <tr>
           <td><%= reservation.id %></td>
-          <td style="width: 100px;">
+          <td>
               <% reservation.reservation_chambres.each do |r| %>
                 <%= r.chambre.numero %>
               <% end %>
           </td>
           <td><%= reservation.user_email %></td>
           <td><%= reservation.user_age %></td>
-          <td style="width: 100px;">
+          <td style="width: 75px;">
               <% reservation.reservation_chambres.each do |r| %>
                 <%= r.chambre.type_chambre %>
               <% end %>
           </td>
-          <td style="width: 50px;">
+          <td>
               <% reservation.reservation_chambres.each do |r| %>
                 <%= r.chambre.vue %>
               <% end %>
@@ -38,7 +38,7 @@
           <td><%= reservation.date_arrive %></td>
           <td><%= reservation.date_depart %></td>
           <td><%= reservation.demande_particuliere %></td>
-          <td style="width: 50px; text-align: right">
+          <td style="text-align: right">
             <% reservation.reservation_chambres.each do |r| %>
               <%= r.chambre.vue_mer_price + r.chambre.vue_jungle_price + r.chambre.price %> $
             <% end %>
@@ -52,7 +52,6 @@
   <table class="table table-striped">
     <tr class="thead-dark">
       <th>Reservation ID</th>
-      <th>User ID</th>
       <th>Chambres reserves</th>
       <th>Email</th>
       <th>Age</th>
@@ -70,20 +69,19 @@
     <% @reservations.each do |reservation| %>
       <tr>
         <td><%= reservation.id %></td>
-        <td><%= reservation.user_id %></td>
-        <td style="width: 100px;">
+        <td>
             <% reservation.reservation_chambres.each do |r| %>
               <%= r.chambre.numero %>
             <% end %>
         </td>
         <td><%= reservation.user_email %></td>
         <td><%= reservation.user_age %></td>
-         <td style="width: 100px;">
+         <td>
             <% reservation.reservation_chambres.each do |r| %>
               <%= r.chambre.type_chambre %>
             <% end %>
         </td>
-         <td style="width: 50px;">
+         <td>
             <% reservation.reservation_chambres.each do |r| %>
               <%= r.chambre.vue %>
             <% end %>
@@ -91,12 +89,16 @@
         <td><%= reservation.date_arrive %></td>
         <td><%= reservation.date_depart %></td>
         <td><%= reservation.demande_particuliere %></td>
-        <td style="width: 50px; text-align: right">
+        <td style="text-align: right">
             <% reservation.reservation_chambres.each do |r| %>
-              <%= r.chambre.vue_mer_price + r.chambre.vue_jungle_price + r.chambre.price %> $
+              <% if r.chambre.vue == "Jungle" %>
+                <%=r.chambre.vue_jungle_price + r.chambre.price %> $
+              <% elsif r.chambre.vue == "Mer" %>
+                <%=r.chambre.vue_mer_price + r.chambre.price %> $
+              <% end %>
             <% end %>
         </td>
-        <td style="text-align: right"><%= reservation.price %></td>
+        <td style="text-align: right"><%= reservation.price %> $</td>
         <td><%= link_to 'Modifier', edit_reservation_path(reservation), style: "color: green !important;" %></td>
         <td><%= link_to 'Supprimer', reservation, style: "color: red !important;", method: :delete, data: { confirm: 'Are you sure?' } %></td> 
       </tr>

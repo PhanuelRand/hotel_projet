@@ -1,14 +1,14 @@
-<div id="chambre-container" class="col-lg-3 col-12">
+<div id="chambre-container" class="col-lg-3 col-12 chambre_box">
     <h4>Chambre #<span id="numero_chambre"></span></h4>
     <hr />
     <div class="field">
-        <span>Type de chambre</span><br />
-            <select id="type_chambre" class="form-control">
-                <option value="None">Choississez le type de chambre</option>
-                <div id="num_chambre" style="visibility: hidden"><% Chambre.select("DISTINCT(type_chambre)").each do |chambre| %></div>
-                    <option value="<%= chambre.type_chambre %>"><%= chambre.type_chambre %></option>
-                <% end %>
-            </select>
+    <span>Type de chambre</span><br />
+        <select id="type_chambre" class="form-control">
+            <option value="None">Choississez le type de chambre</option>
+            <div id="num_chambre" style="visibility: hidden"><% Chambre.select("DISTINCT(type_chambre)").each do |chambre| %></div>
+                <option value="<%= chambre.type_chambre %>"><%= chambre.type_chambre %></option>
+            <% end %>
+        </select>
     </div>
 
     <div class="field">
@@ -35,7 +35,9 @@
 
     <div class="field">
         <span>Prix de la chambre</span><br />
-        <p id="prix_par_chambre"><span id="price_reservation" class="prix_chambre"></span></p> 
+        <p id="prix_par_chambre">
+            <span id="price_reservation" class="prix_chambre"></span>
+        </p> 
     </div>
 </div>
 

@@ -59,18 +59,18 @@ class ReservationsController < ApplicationController
 
     # TODO: pas beau ewww a refaire
     if type_chambre == "None" && type_vue == "None"
-      @chambres_filtered = Chambre.all
+      @chambres = Chambre.all
     else
       if type_chambre == "None" && type_vue != "None"
-        @chambres_filtered = Chambre.where(type_vue: type_vue)
+        @chambres = Chambre.where(type_vue: type_vue)
       elsif type_chambre != "None" && type_vue == "None"
-        @chambres_filtered = Chambre.where(type_chambre: type_chambre)
+        @chambres = Chambre.where(type_chambre: type_chambre)
       else
-        @chambres_filtered = Chambre.where(["type_chambre = ? and vue = ?", type_chambre, type_vue])
+        @chambres = Chambre.where(["type_chambre = ? and vue = ?", type_chambre, type_vue])
       end
     end
 
-    render json: @chambres_filtered
+    render json: @chambres
   end
 
   def update

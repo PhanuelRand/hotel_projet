@@ -54,7 +54,8 @@
     <hr />
     <div class="field">
        <span>Prix de la reservation</span><br />
-        <p id="prix_par_chambre"><span id="price_reservation_total"></span>  $</p>  </div>
+        <%# <%= f.number_field :price, class: "form-control", style: "width: 100px" %> 
+        <p id="prix_par_chambre"><span id="price_reservation_total"></span></p></div>
     <br />
     <div class="actions">
       <%= f.submit "Valider", class: "btn btn-primary confirmation" %>

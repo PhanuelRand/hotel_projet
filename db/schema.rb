@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20190211165520) do
+ActiveRecord::Schema.define(:version => 20190215202335) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -33,16 +33,11 @@ ActiveRecord::Schema.define(:version => 20190211165520) do
 
   create_table "chambres", :force => true do |t|
     t.string   "name"
-    t.string   "type_chambre"
-    t.string   "vue"
-    t.datetime "created_at",                                     :null => false
-    t.datetime "updated_at",                                     :null => false
-    t.string   "image"
-    t.decimal  "price",            :precision => 8, :scale => 2
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+    t.string   "iamge_url"
     t.string   "numero"
-    t.decimal  "vue_jungle_price", :precision => 8, :scale => 2
-    t.decimal  "vue_mer_price",    :precision => 8, :scale => 2
-    t.decimal  "price_total",      :precision => 8, :scale => 2
+    t.decimal  "price_total", :precision => 8, :scale => 2
   end
 
   create_table "reservation_chambres", :force => true do |t|
@@ -52,21 +47,38 @@ ActiveRecord::Schema.define(:version => 20190211165520) do
 
   create_table "reservations", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "reservation_chambre_id"
-    t.string   "nombre_chambre"
     t.string   "user_name"
     t.string   "user_email"
     t.integer  "user_age"
-    t.string   "type_de_chambre"
-    t.string   "type_de_vue"
     t.datetime "date_arrive"
     t.datetime "date_depart"
     t.text     "demande_particuliere"
-    t.decimal  "price"
-    t.datetime "created_at",                                       :null => false
-    t.datetime "updated_at",                                       :null => false
-    t.string   "numero_chambres",        :default => "'--- []\n'"
-    t.string   "list_chambres"
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+    t.string   "numero_chambres",      :default => "'"
+  end
+
+  create_table "role", :force => true do |t|
+    t.string   "role_type"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "type_chambre", :force => true do |t|
+    t.string   "type_de_chambre"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "type_vue", :force => true do |t|
+    t.string   "type_de_vue"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "user_role", :force => true do |t|
+    t.integer "user_id"
+    t.integer "role_id"
   end
 
   create_table "users", :force => true do |t|

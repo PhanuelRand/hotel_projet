@@ -7,4 +7,7 @@ class User < ActiveRecord::Base
   has_many :reservations
   has_many :reservation_chambres, through: :reservations
 
+  has_many :user_roles
+  has_many :roles, through: :user_roles 
+
 end

@@ -16,8 +16,8 @@
             %br
             %div.row
                 %div.col-lg-12.col-12 
-                    %span=link_to 'Details', chambre, :class => "btn btn-primary white" 
                     -if signed_in?
+                        %span=link_to 'Details', chambre, :class => "btn btn-primary white" 
                         %span=link_to 'Reserver', new_reservation_path, :class => "btn btn-info white"
 
             

@@ -90,7 +90,6 @@ jQuery ->
                 console.log(data);
         });
 
-
     $("#show_details").click ->
         console.log("ok")
         type_chambre_select = $(".chambre_box.activated").children().eq(2).children().eq(2)

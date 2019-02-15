@@ -25,6 +25,9 @@
         <span>Numero de chambre</span><br />
         <select id="num_chr" class="form-control" name="reservation[list_chambres][]">
         <option value="None">Choississez la chambre</option>
+         <div id="num_chambre" style="visibility: hidden"><% Chambre.all.each do |chambre| %></div>
+            <option value="<%= chambre.numero %>"><%= chambre.numero %></option>
+            <% end %>
         </select>
     </div>
 

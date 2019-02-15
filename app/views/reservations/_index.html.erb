@@ -1,4 +1,5 @@
 <%# <h1>Listes des reservations</h1> %>
+<%# <%binding.pry%> 
 <% if current_user.admin == false %>
   <% @reservations.each do |reservation| %>
     <% if current_user.email == reservation.user_email %>
@@ -12,9 +13,10 @@
           <th>Type de vue</th>
           <th>Date arrive</th>
           <th>Date depart</th>
+          <th>Nombre de jours</th>
           <th>Demande particuliere</th>
           <th>Prix par chambre</th>
-          <th>Prix total</th>
+          <th>Prix de la reservation</th>
         </tr>
         <tr>
           <td><%= reservation.id %></td>
@@ -25,7 +27,7 @@
           </td>
           <td><%= reservation.user_email %></td>
           <td><%= reservation.user_age %></td>
-          <td style="width: 75px;">
+          <td>
               <% reservation.reservation_chambres.each do |r| %>
                 <%= r.chambre.type_chambre %>
               <% end %>
@@ -35,16 +37,19 @@
                 <%= r.chambre.vue %>
               <% end %>
           </td>
-          <td><%= reservation.date_arrive %></td>
-          <td><%= reservation.date_depart %></td>
+          <td><%= reservation.date_arrive.strftime("%m-%d-%y") %></td>
+          <td><%= reservation.date_depart.strftime("%m-%d-%y") %></td>
           <td><%= reservation.demande_particuliere %></td>
           <td style="text-align: right">
-            <% reservation.reservation_chambres.each do |r| %>
-              <%= r.chambre.vue_mer_price + r.chambre.vue_jungle_price + r.chambre.price %> $
-            <% end %>
+              <% reservation.reservation_chambres.each do |r| %>
+                <% if r.chambre.vue == "Jungle" %>
+                  <%=r.chambre.vue_jungle_price + r.chambre.price %> $
+                <% elsif r.chambre.vue == "Mer" %>
+                  <%=r.chambre.vue_mer_price + r.chambre.price %> $
+                <% end %>
+              <% end %>
           </td>
-          <td style="text-align: right"><%= reservation.price %></td>
-        </tr>   
+        </tr>
       </table>
     <% end %>  
   <% end %>  
@@ -59,6 +64,7 @@
       <th>Type de vue</th>
       <th>Date arrive</th>
       <th>Date depart</th>
+      <th>Nombre de jours</th>
       <th>Demande particuliere</th>
       <th>Prix par chambre</th>
       <th>Prix de la reservation</th>
@@ -86,8 +92,9 @@
               <%= r.chambre.vue %>
             <% end %>
         </td>
-        <td><%= reservation.date_arrive %></td>
-        <td><%= reservation.date_depart %></td>
+        <td><%= reservation.date_arrive.strftime("%m-%d-%y") %></td>
+        <td><%= reservation.date_depart.strftime("%m-%d-%y") %></td>
+        <td><%= @nb_jour %></td>
         <td><%= reservation.demande_particuliere %></td>
         <td style="text-align: right">
             <% reservation.reservation_chambres.each do |r| %>

@@ -27,14 +27,21 @@ class ReservationsController < ApplicationController
   end
 
   def create
+
     prix_total = 0
     price_chambres = 0
     price_vue_jungle = 0
     price_vue_mer = 0
+    @nb_jour = 0
+
     params[:reservation][:user_id] = current_user.id
 
     @reservation = Reservation.create(params[:reservation])
+    @date_debut = @reservation.date_arrive
+    @date_fin = @reservation.date_depart
 
+    @nb_jour = (@date_fin.to_date - @date_debut.to_date).to_i
+    # binding.pry
     @list_chambre = @reservation.list_chambres
     @chambres = Chambre.where(numero: @list_chambre)
     @chambres.each do |chambre|
@@ -45,8 +52,8 @@ class ReservationsController < ApplicationController
       price_vue_mer += @chambres.where(["type_chambre = ? and vue = ?", chambre.type_chambre, "Mer"]).sum(:vue_mer_price)
     end
 
-    @reservation.update_attributes(:price => (price_chambres + price_vue_jungle + price_vue_mer))
-
+    @reservation.update_attributes(:price => (price_chambres + price_vue_jungle + price_vue_mer) * @nb_jour)
+    
     if @reservation.save
       flash[:success] = "Reservation created!"
       respond_with(@reservation)
@@ -57,7 +64,6 @@ class ReservationsController < ApplicationController
     type_chambre = params[:type_chambre]
     type_vue = params[:type_vue]
 
-    # TODO: pas beau ewww a refaire
     if type_chambre == "None" && type_vue == "None"
       @chambres = Chambre.all
     else

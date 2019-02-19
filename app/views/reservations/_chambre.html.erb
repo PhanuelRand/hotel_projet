@@ -2,31 +2,31 @@
     <h4>Chambre #<span id="numero_chambre"></span></h4>
     <hr />
     <div class="field">
-    <span>Type de chambre</span><br />
-        <select id="type_chambre" class="form-control type_chambre">
-            <option value="None">Choississez le type de chambre</option>
-            <div id="num_chambre" style="visibility: hidden"><% Chambre.select("DISTINCT(type_chambre)").each do |chambre| %></div>
-                <option value="<%= chambre.type_chambre %>"><%= chambre.type_chambre %></option>
+    <span>Type de vue</span><br />
+         <select id="type_vue" class="form-control type_vue" name="type_de_vue">
+      <option value="None">Choississez la vue de votre chambre</option>
+            <div style="visibility: hidden"><% TypeVue.all.each do |tc| %></div>
+            <option value="<%= tc.type_de_vue %>"><%= tc.type_de_vue %></option>
             <% end %>
-        </select>
+       </select>
     </div>
 
     <div class="field">
-        <span>Type de vue</span><br />
-            <select id="type_vue" class="form-control type_vue">
-            <option value="None">Choississez la vue de votre chambre</option>
-            <div id="num_chambre" style="visibility: hidden"><% Chambre.select("DISTINCT(VUE)").each do |chambre| %></div>
-                <option value="<%= chambre.vue %>"><%= chambre.vue %></option>
+     <span>Type de chambre</span><br />
+          <select id="type_vue" class="form-control type_chambre" name="type_de_vue">
+      <option value="None">Choississez la vue de votre chambre</option>
+            <div style="visibility: hidden"><% TypeChambre.all.each do |tc| %></div>
+            <option value="<%= tc.type_de_chambre %>"><%= tc.type_de_chambre %></option>
             <% end %>
-        </select>
+       </select>
     </div> 
 
     <div class="field">
         <span>Numero de chambre</span><br />
         <select id="num_chr" class="form-control" name="reservation[list_chambres][]">
         <option value="None">Choississez la chambre</option>
-         <div id="num_chambre" style="visibility: hidden"><% Chambre.all.each do |chambre| %></div>
-            <option value="<%= chambre.numero %>"><%= chambre.numero %></option>
+          <div style="visibility: hidden"><% Chambre.all.each do |tc| %></div>
+            <option value="<%= tc.numero %>"><%= tc.numero %></option>
             <% end %>
         </select>
     </div>

@@ -51,7 +51,7 @@ class ReservationsController < ApplicationController
       if type_chambre == "None" && type_vue != "None"
         @chambres = @chambre.type_chambre.where(type_de_chambre: type_vue)
       elsif type_chambre != "None" && type_de_vue == "None"
-        @chambres = @chambre.type_vue.where(type_de_vue: type_vue)
+        @chambres = @chambre.type_vue.where(type_de_chambre: type_vue)
       else
         @chambres =  @chambre.where(["@chambre.type_chambre = ? and @chambre.type_vue = ?", type_chambre, type_vue])
       end

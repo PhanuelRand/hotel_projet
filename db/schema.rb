@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20190215202335) do
+ActiveRecord::Schema.define(:version => 20190219160523) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -33,11 +33,13 @@ ActiveRecord::Schema.define(:version => 20190215202335) do
 
   create_table "chambres", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
-    t.string   "iamge_url"
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
+    t.string   "image_url"
     t.string   "numero"
-    t.decimal  "price_total", :precision => 8, :scale => 2
+    t.decimal  "price_total",     :precision => 8, :scale => 2
+    t.integer  "type_chambre_id"
+    t.integer  "type_vue_id"
   end
 
   create_table "reservation_chambres", :force => true do |t|
@@ -56,29 +58,36 @@ ActiveRecord::Schema.define(:version => 20190215202335) do
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
     t.string   "numero_chambres",      :default => "'"
+    t.string   "list_chambres"
   end
 
-  create_table "role", :force => true do |t|
+  create_table "roles", :force => true do |t|
     t.string   "role_type"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  create_table "type_chambre", :force => true do |t|
+  create_table "type_chambres", :force => true do |t|
     t.string   "type_de_chambre"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.integer  "chambre_id"
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
+    t.decimal  "price",           :precision => 8, :scale => 2
   end
 
-  create_table "type_vue", :force => true do |t|
+  create_table "type_vues", :force => true do |t|
     t.string   "type_de_vue"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer  "chambre_id"
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+    t.decimal  "price",       :precision => 8, :scale => 2
   end
 
-  create_table "user_role", :force => true do |t|
-    t.integer "user_id"
-    t.integer "role_id"
+  create_table "user_roles", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|

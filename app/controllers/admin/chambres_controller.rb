@@ -4,7 +4,7 @@ class ChambresController < ApplicationController
   respond_to :html
 
   def list_jungle
-    @chambre_jungle = Chambre.where(vue: "Jungle")
+    @chambre_jungle = Chambre.type_chambre.where(type_de_vue: "Jungle")
 
     respond_to do |format|
       format.html
@@ -31,6 +31,8 @@ class ChambresController < ApplicationController
   end
 
   def list_double
+    @chambre_double = Chambre.where(type_chambre: "Double")
+
     respond_to do |format|
       format.html
       format.js {render layout: false}
@@ -94,10 +96,8 @@ class ChambresController < ApplicationController
   end
 
   def update
-    # @chambre = Chambre.find(params[:id])
     @chambre.update_attributes(chambre_params)
-    # @chambre.type_chambre.update_attributes(type_de_chambre: params[:type_de_chambre])
-    # @chambre.type_vue.update_attributes(type_de_vue: "Jungle")
+    respond_with(@chambre)
   end
 
   def destroy

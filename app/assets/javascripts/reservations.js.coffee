@@ -10,8 +10,8 @@ jQuery ->
     type_chambre_select = $ ".type_chambre"
     type_vue_select = $ ".type_vue"
     # type_vue_select = $(".chambre_box.activated").children().eq(3).children().eq(2)
-    numero_chambre = $(".chambre_box.activated").children().eq(4).children().eq(2)
-    #numero_chambre = $("#num_chr");
+    #numero_chambre = $(".chambre_box.activated").children().eq(4).children().eq(2)
+    numero_chambre = $("#num_chr");
     prix_par_chambre = $(".chambre_box.activated").children().eq(5).children().eq(2).children()
 
     changeClass = (element) ->

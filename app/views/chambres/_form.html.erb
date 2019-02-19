@@ -15,34 +15,37 @@
     <%= f.label :name %><br />
     <%= f.text_field :name, class: "form-control" %>
   </div>
-  <div class="field">
-    <%= f.label :type_chambre %><br />
-    <%= f.text_field :type_chambre, class: "form-control" %>
-  </div>
-  <div class="field">
-    <%= f.label :vue %><br />
-    <%= f.text_field :vue, class: "form-control" %>
-  </div>
+  
    <div class="field">
-    <%= f.label :image %><br />
-    <%= f.text_field :image, class: "form-control" %>
+    <%= f.label :image_url %><br />
+    <%= f.text_field :image_url, class: "form-control" %>
   </div>
-   <div class="field">
-    <%= f.label :price %><br />
-    <%= f.text_field :price, class: "form-control" %>
-  </div>
-  <div class="field">
-    <%= f.label :vue_jungle_price %><br />
-    <%= f.text_field :vue_jungle_price, class: "form-control" %>
-  </div>
-  <div class="field">
-    <%= f.label :vue_mer_price %><br />
-    <%= f.text_field :vue_mer_price, class: "form-control" %>
-  </div>
+
    <div class="field">
     <%= f.label :numero %><br />
     <%= f.text_field :numero, class: "form-control" %>
   </div>
+
+  <div class="field">
+    <span>Type de vue</span><br />
+      <select id="type_vue" class="form-control" name="type_de_vue">
+      <option value="None">Choississez la vue de votre chambre</option>
+            <div style="visibility: hidden"><% TypeVue.all.each do |tc| %></div>
+            <option value="<%= tc.type_de_vue %>"><%= tc.type_de_vue %></option>
+            <% end %>
+       </select>
+  </div>
+
+  <div class="field">
+    <span>Type de chambre</span><br />
+      <select id="type_chambre" class="form-control" name="type_de_chambre">
+      <option value="None">Choississez le type de chambre</option>
+            <div style="visibility: hidden"><% TypeChambre.all.each do |tc| %></div>
+            <option value="<%= tc.type_de_chambre %>"><%= tc.type_de_chambre %></option>
+            <% end %>
+       </select>
+  </div>
+
   <div class="actions">
     <%= f.submit "Valider", class: "btn btn-primary" %>
   </div>

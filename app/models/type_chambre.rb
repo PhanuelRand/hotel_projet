@@ -1,5 +1,5 @@
 class TypeChambre < ActiveRecord::Base
-    attr_accessible :type_de_chambre
-  
-    has_many :chambres
+  attr_accessible :chambre_id, :type_de_chambre
+
+  has_many :chambres
 end

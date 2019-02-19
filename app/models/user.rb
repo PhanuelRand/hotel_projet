@@ -10,4 +10,12 @@ class User < ActiveRecord::Base
   has_many :user_roles
   has_many :roles, through: :user_roles 
 
+
+  def user_admin
+    if self.email != nil
+      self.user_roles.each do |u|
+        return u.role.role_type == "Admin"
+      end
+    end
+  end
 end

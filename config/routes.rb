@@ -16,6 +16,11 @@ HotelProjet::Application.routes.draw do\
 
   devise_for :users
 
+
+  # namespace :admin do
+  #   resources :chambres, :reservations
+  # end
+
   resources :chambres
   resources :reservations
   resources :users, only: [:show]

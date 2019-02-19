@@ -1,7 +1,7 @@
 - @chambre_mer.each do |chambre|
     %div.col-lg-4.col-12#chambre_type
         %div.chambre_container 
-            =image_tag("#{chambre.image}", class: "chambre_img")
+            =image_tag("#{chambre.image_url}", class: "chambre_img")
             %span.nom_chambre=chambre.name
             %br
             %span.type_chambre_titre Type du chambre: 

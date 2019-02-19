@@ -1,17 +1,19 @@
 - @chambres.each do |chambre|
     %div.col-lg-4.col-12#chambre_type
         %div.chambre_container 
-            =image_tag("#{chambre.image}", class: "chambre_img")
+            =image_tag("#{chambre.image_url}", class: "chambre_img")
             %span.nom_chambre=chambre.name
             %br
+            
             %span.type_chambre_titre Type du chambre: 
-            %span.type_chambre=chambre.type_chambre
+            %span.type_chambre=chambre.get_type_chambre
             %br
-            %span.vue_chambre_titre Vue de la chambre: 
-            %span.vue_chambre=chambre.vue
+            %span.vue_chambre Type de vue: 
+            %span.vue_chambre=chambre.get_type_vue
             %br
-            %span.price_chambre A partir de 
-            %span.price_chambre #{chambre.price} $
+            %span.price_chambre Prix: 
+            %span.price_chambre=chambre.get_price
+            %span.price_chambre $
             %br
             %br
             %div.row
@@ -20,9 +22,8 @@
                         %span=link_to 'Details', chambre, :class => "btn btn-primary white" 
                         %span=link_to 'Reserver', new_reservation_path, :class => "btn btn-info white"
 
-            
             -if signed_in?
-                -if current_user.admin?
+                -if current_user.user_admin == true
                     %div.row
                         %div.col-lg-12.col-12 
                             %br

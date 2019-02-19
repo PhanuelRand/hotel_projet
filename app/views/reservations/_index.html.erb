@@ -19,37 +19,37 @@
           <th>Prix de la reservation</th>
         </tr>
         <tr>
-          <td><%= reservation.id %></td>
-          <td>
-              <% reservation.reservation_chambres.each do |r| %>
-                <%= r.chambre.numero %>
-              <% end %>
-          </td>
-          <td><%= reservation.user_email %></td>
-          <td><%= reservation.user_age %></td>
-          <td>
-              <% reservation.reservation_chambres.each do |r| %>
-                <%= r.chambre.type_chambre %>
-              <% end %>
-          </td>
-          <td>
-              <% reservation.reservation_chambres.each do |r| %>
-                <%= r.chambre.vue %>
-              <% end %>
-          </td>
-          <td><%= reservation.date_arrive.strftime("%m-%d-%y") %></td>
-          <td><%= reservation.date_depart.strftime("%m-%d-%y") %></td>
-          <td><%= reservation.demande_particuliere %></td>
-          <td style="text-align: right">
-              <% reservation.reservation_chambres.each do |r| %>
-                <% if r.chambre.vue == "Jungle" %>
-                  <%=r.chambre.vue_jungle_price + r.chambre.price %> $
-                <% elsif r.chambre.vue == "Mer" %>
-                  <%=r.chambre.vue_mer_price + r.chambre.price %> $
-                <% end %>
-              <% end %>
-          </td>
-        </tr>
+        <td><%= reservation.id %></td>
+        <td>
+            <% reservation.reservation_chambres.each do |r| %>
+              <%= r.chambre.numero %>
+            <% end %>
+        </td>
+        <td><%= reservation.user_email %></td>
+        <td><%= reservation.user_age %></td>
+         <td>
+            <% reservation.reservation_chambres.each do |r| %>
+              <%= r.chambre.get_type_chambre %>
+            <% end %>
+        </td>
+         <td>
+            <% reservation.reservation_chambres.each do |r| %>
+              <%= r.chambre.get_type_vue %>
+            <% end %>
+        </td>
+        <td><%= reservation.date_arrive.strftime("%m-%d-%y") %></td>
+        <td><%= reservation.date_depart.strftime("%m-%d-%y") %></td>
+        <td><%= reservation.nb_days %></td>
+        <td><%= reservation.demande_particuliere %></td>
+        <td style="text-align: right">
+            <% reservation.reservation_chambres.each do |r| %>
+              <%= r.chambre.get_price %> $
+            <% end %> 
+        </td>
+        <td style="text-align: right">
+          <%= reservation.total_price %> $
+        </td>
+      </tr>
       </table>
     <% end %>  
   <% end %>  
@@ -84,28 +84,26 @@
         <td><%= reservation.user_age %></td>
          <td>
             <% reservation.reservation_chambres.each do |r| %>
-              <%= r.chambre.type_chambre %>
+              <%= r.chambre.get_type_chambre %>
             <% end %>
         </td>
          <td>
             <% reservation.reservation_chambres.each do |r| %>
-              <%= r.chambre.vue %>
+              <%= r.chambre.get_type_vue %>
             <% end %>
         </td>
         <td><%= reservation.date_arrive.strftime("%m-%d-%y") %></td>
         <td><%= reservation.date_depart.strftime("%m-%d-%y") %></td>
-        <td><%= @nb_jour %></td>
+        <td><%= reservation.nb_days %></td>
         <td><%= reservation.demande_particuliere %></td>
         <td style="text-align: right">
             <% reservation.reservation_chambres.each do |r| %>
-              <% if r.chambre.vue == "Jungle" %>
-                <%=r.chambre.vue_jungle_price + r.chambre.price %> $
-              <% elsif r.chambre.vue == "Mer" %>
-                <%=r.chambre.vue_mer_price + r.chambre.price %> $
-              <% end %>
-            <% end %>
+              <%= r.chambre.get_price %> $
+            <% end %> 
         </td>
-        <td style="text-align: right"><%= reservation.price %> $</td>
+        <td style="text-align: right">
+          <%= reservation.total_price %> $
+        </td>
         <td><%= link_to 'Modifier', edit_reservation_path(reservation), style: "color: green !important;" %></td>
         <td><%= link_to 'Supprimer', reservation, style: "color: red !important;", method: :delete, data: { confirm: 'Are you sure?' } %></td> 
       </tr>

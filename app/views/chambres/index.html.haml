@@ -5,8 +5,8 @@
     %h1.titre Choisissez parmi nos luxueuses chambres
     %hr
     -if signed_in?
-        -if current_user.admin?
-            %p=link_to 'Nouvelle chambre', new_chambre_path, {:class => "btn btn-primary white"}
+        -if current_user.user_admin("Admin") == true
+            %p=link_to 'Nouvelle chambre', new_admin_chambre_path, {:class => "btn btn-primary white"}
             %hr
 
     %div.row

@@ -12,22 +12,34 @@ HotelProjet::Application.routes.draw do\
   match '/list_executive' => 'chambres#list_executive', :as => 'list_executive'
   match '/list_presidentielle' => 'chambres#list_presidentielle', :as => 'list_presidentielle'
 
-  devise_for :admins
-
   devise_for :users
 
+  # admin_chambres GET    /admin/chambres(.:format)               admin/chambres#index
+  # POST   /admin/chambres(.:format)               admin/chambres#create
+  # new_admin_chambre GET    /admin/chambres/new(.:format)           admin/chambres#new
+  # edit_admin_chambre GET    /admin/chambres/:id/edit(.:format)      admin/chambres#edit
+  # admin_chambre GET    /admin/chambres/:id(.:format)           admin/chambres#show
+  # PUT    /admin/chambres/:id(.:format)           admin/chambres#update
+  # DELETE /admin/chambres/:id(.:format)           admin/chambres#destroy
+  # admin_reservations GET    /admin/reservations(.:format)           admin/reservations#index
+  # POST   /admin/reservations(.:format)           admin/reservations#create
+  # new_admin_reservation GET    /admin/reservations/new(.:format)       admin/reservations#new
+  # edit_admin_reservation GET    /admin/reservations/:id/edit(.:format)  admin/reservations#edit
+  # admin_reservation GET    /admin/reservations/:id(.:format)       admin/reservations#show
+  # PUT    /admin/reservations/:id(.:format)       admin/reservations#update
+  # DELETE /admin/reservations/:id(.:format)       admin/reservations#destroy
 
-  # namespace :admin do
-  #   resources :chambres, :reservations
-  # end
+  namespace :admin do
+    resources :users
+    resources :chambres 
+    resources :reservations
+  end
 
-  resources :chambres
-  resources :reservations
+  resources :chambres, only: [:show]
+  resources :reservations, only: [:show, :new, :create]
   resources :users, only: [:show]
 
   devise_for :users, path: 'auth', path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'cmon_let_me_in' }
-  devise_for :admins, path: 'auth', path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'cmon_let_me_in' }
-
 
   get '/show_filtered_room', to: 'reservations#show_filtered_room' 
 

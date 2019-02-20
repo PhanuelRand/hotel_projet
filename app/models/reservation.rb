@@ -6,6 +6,15 @@ class Reservation < ActiveRecord::Base
   has_many :reservation_chambres
   has_many :chambres, through: :reservation_chambres
 
+  validates :date_arrive, presence: true
+  validates :date_depart, presence: true
+  validates :demande_particuliere, presence: true
+  validates :user_age, presence: true
+  validates :user_email, presence: true
+  validates :demande_particuliere, presence: true
+  validates :list_chambres, presence: true
+
+
   def nb_days
     (self.date_depart.to_date - self.date_arrive.to_date).to_i
   end

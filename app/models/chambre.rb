@@ -7,21 +7,22 @@ class Chambre < ActiveRecord::Base
   belongs_to :type_chambre
   belongs_to :type_vue
 
+
+  validates :name, presence: true
+  validates :image_url, presence: true
+  validates :numero, presence: true
+  validates :type_chambre_id, presence: true
+  validates :type_vue_id, presence: true
+
   def get_type_chambre
-    if self.type_chambre != nil
-      self.type_chambre.type_de_chambre
-    end
+    self.type_chambre.type_de_chambre
   end
 
   def get_type_vue
-    if self.type_vue != nil
-      self.type_vue.type_de_vue
-    end
+    self.type_vue.type_de_vue
   end
 
   def get_price
-    if self.type_vue != nil
-      self.type_vue.price + self.type_chambre.price
-    end
+    self.type_vue.price + self.type_chambre.price
   end
 end

@@ -1,0 +1,64 @@
+<%= form_for(@reservation) do |f| %>
+  <% if @reservation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@reservation.errors.count, "error") %> prohibited this reservation from being saved:</h2>
+
+      <ul>
+      <% @reservation.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <span id="reservation_show">
+  <hr style="border: 2px solid #777;" />
+
+    <div id="render_chambre" class="row" style="margin: 0 auto;">
+        <%= render 'chambre' %>
+    </div>
+    <hr style="border: 2px solid #777;" />
+    <p id="show_details"><%= link_to 'Ajouter une chambre', new_admin_reservation_path, remote: true, class: "btn btn-success white show_details" %></p>
+  
+  <div class="row">
+    <div class="col-lg-6 col-12">
+      <div class="field">
+      <%= f.label :user_name %><br />
+      <%= f.text_field :user_name, class: "form-control" %>
+      </div>
+      <div class="field">
+        <%= f.label :user_email %><br />
+        <%= f.text_field :user_email, {:class => "form-control", :value => current_user.email} %>
+      </div>
+      <div class="field">
+        <%= f.label :user_age %><br />
+        <%= f.number_field :user_age, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="col-lg-6 col-12">
+        <div class="field">
+          <%= f.label :date_arrive %><br />
+          <%= f.datetime_select :date_arrive, class: "form-control" %>
+        </div>
+        <div class="field">
+          <%= f.label :date_depart %><br />
+          <%= f.datetime_select :date_depart, class: "form-control" %>
+        </div>
+        <div class="field">
+          <%= f.label :demande_particuliere %><br />
+          <%= f.text_area :demande_particuliere, class: "form-control", rows: "3", style: "height: 68px" %>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="field">
+       <span>Prix de la reservation</span><br />
+        <%# <%= f.number_field :price, class: "form-control", style: "width: 100px" %> 
+        <p id="prix_par_chambre"><span id="price_reservation_total"></span></p></div>
+    <br />
+    <div class="actions">
+      <%= f.submit "Valider", class: "btn btn-primary confirmation" %>
+    </div>
+  </span>
+  <% end %>

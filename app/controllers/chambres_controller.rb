@@ -66,7 +66,6 @@ class ChambresController < ApplicationController
 
   def index
     @chambres = Chambre.all  
-    # respond_with(@chambres)
   end
 
   def show

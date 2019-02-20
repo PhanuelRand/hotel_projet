@@ -1,4 +1,4 @@
-<%= form_for(@chambre) do |f| %>
+<%= form_for [:admin, @chambre] do |f| %>
   <% if @chambre.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@chambre.errors.count, "error") %> prohibited this chambre from being saved:</h2>

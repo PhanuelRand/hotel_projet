@@ -42,18 +42,18 @@ class ReservationsController < ApplicationController
   end
 
   def show_filtered_room
-    type_chambre = params[:type_chambre]
-    type_vue = params[:type_vue]
+    type_chambre = params[:type_chambre_id]
+    type_vue = params[:type_vue_id]
 
     if type_chambre == "None" && type_vue == "None"
       @chambres = Chambre.all
     else
       if type_chambre == "None" && type_vue != "None"
-        @chambres = @chambre.type_chambre.where(type_de_chambre: type_vue)
-      elsif type_chambre != "None" && type_de_vue == "None"
-        @chambres = @chambre.type_vue.where(type_de_vue: type_vue)
+        @chambres = Chambre.where(type_chambre_id: type_chambre)
+      elsif type_chambre != "None" && type_vue == "None"
+        @chambres = Chambre.where(type_vue_id: type_vue)
       else
-        @chambres =  @chambre.where(["@chambre.type_chambre = ? and @chambre.type_vue = ?", type_chambre, type_vue])
+        @chambres =  Chambre.where(["type_chambre_id = ? and type_vue_id = ?", type_chambre, type_vue])
       end
     end
 

@@ -19,7 +19,7 @@
       -# -else
       -#   %p.vue_details_chambre=@chambre.vue_mer_price 
       -if current_user.admin?  
-        %span=link_to 'Modifier', edit_chambre_path(@chambre), :class => "btn btn-primary white" 
+        %span=link_to 'Modifier', edit_admin_chambre_path(@chambre), :class => "btn btn-primary white" 
       %span= link_to 'Nouvelle Reservation', new_reservation_path, class: "btn btn-success white"
-      %span=link_to 'Retour', chambres_path, :class => "btn btn-secondary white"
+      %span=link_to 'Retour', root_url, :class => "btn btn-secondary white"
     

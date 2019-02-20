@@ -6,4 +6,8 @@ class ReservationChambre < ActiveRecord::Base
 
     belongs_to :chambre
     belongs_to :reservation
+
+    validates :reservation_id, presence: true
+    validates :chambre_id, presence: true
+  
 end

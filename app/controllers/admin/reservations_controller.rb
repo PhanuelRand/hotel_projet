@@ -1,4 +1,4 @@
-class ReservationsController < ApplicationController
+class Admin::ReservationsController < AdminController
   before_filter :set_reservation, only: [:show, :edit, :update, :destroy]
 
   respond_to :html

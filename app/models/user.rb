@@ -10,12 +10,18 @@ class User < ActiveRecord::Base
   has_many :user_roles
   has_many :roles, through: :user_roles 
 
-
-  def user_admin
-    if self.email != nil
-      self.user_roles.each do |u|
-        return u.role.role_type == "Admin"
-      end
-    end
+  validates :email, presence: true
+  validates :password, presence: true
+  validates :password_confirmation, presence: true
+  validates :remember_me, presence: true
+  
+  def user_admin(role="")
+    self.roles.map{|x| x.role_type}.include?(role)
   end
+
+  # def user_admin(roles)
+  #   list_role = []
+  #   list_role = roles
+  #   self.roles.map.any?{|x| x.role_type}.include?(list_role)
+  # end
 end
